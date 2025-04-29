@@ -3,5 +3,6 @@
     "flutterTools.displayMobxContextMenu": false,
     "flutterTools.displayRiverpodContextMenu": false,
     "flutterTools.displayModularContextMenu": false,
-    "cmake.sourceDirectory": "D:/coffee project/coffee/linux"
+    "cmake.sourceDirectory": "D:/coffee project/coffee/linux",
+    "java.compile.nullAnalysis.mode": "automatic"
 }
