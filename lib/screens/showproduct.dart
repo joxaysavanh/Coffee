@@ -13,9 +13,10 @@ class _ProductPageState extends State<ProductPage1> {
   List<dynamic> data = [];
   List<dynamic> sizes = [];
   List<dynamic> categories = [];
-  final String url = "http://192.168.3.192:3000/book"; // API endpoint
-  final String sizesUrl = "http://192.168.3.192:3000/sizes"; // Sizes endpoint
-  final String categoriesUrl = "http://192.168.3.192:3000/categories"; // Categories endpoint
+  final String url = "http://192.168.114.192:3000/book"; // API endpoint
+  final String sizesUrl = "http://192.168.114.192:3000/sizes"; // Sizes endpoint
+  final String categoriesUrl =
+      "http://192.168.114.192:3000/categories"; // Categories endpoint
   bool _isLoading = true;
   String _errorMessage = '';
   final TextEditingController _searchController = TextEditingController();
@@ -70,7 +71,8 @@ class _ProductPageState extends State<ProductPage1> {
       final sizesResponse = await http.get(Uri.parse(sizesUrl));
       final categoriesResponse = await http.get(Uri.parse(categoriesUrl));
 
-      if (sizesResponse.statusCode == 200 && categoriesResponse.statusCode == 200) {
+      if (sizesResponse.statusCode == 200 &&
+          categoriesResponse.statusCode == 200) {
         setState(() {
           sizes = json.decode(sizesResponse.body);
           categories = json.decode(categoriesResponse.body);
@@ -84,7 +86,8 @@ class _ProductPageState extends State<ProductPage1> {
   }
 
   // Function to handle data update
-  Future<void> _updateData(int index, Map<String, dynamic> updatedProduct) async {
+  Future<void> _updateData(
+      int index, Map<String, dynamic> updatedProduct) async {
     final productIdToUpdate = updatedProduct['Pro_ID'];
     final updateUrl = '$url/$productIdToUpdate';
 
@@ -171,8 +174,7 @@ class _ProductPageState extends State<ProductPage1> {
           createdProduct = {
             'Pro_ID': createdProduct['Pro_ID'] ?? newProduct['Pro_ID'],
             'Pro_Name': createdProduct['Pro_Name'] ?? newProduct['Pro_Name'],
-            'Pro_Price':
-                createdProduct['Pro_Price'] ?? newProduct['Pro_Price'],
+            'Pro_Price': createdProduct['Pro_Price'] ?? newProduct['Pro_Price'],
             'Pro_Qty': createdProduct['Pro_Qty'] ?? newProduct['Pro_Qty'],
             'Pro_Descrip':
                 createdProduct['Pro_Descrip'] ?? newProduct['Pro_Descrip'],
@@ -390,7 +392,7 @@ class _ProductPageState extends State<ProductPage1> {
                             (size) => size['Size_ID'] == product['Size_ID'],
                             orElse: () => {'Size_Name': 'N/A'},
                           )['Size_Name'];
-                          
+
                           String categoryName = categories.firstWhere(
                             (category) => category['Cg_ID'] == product['Cg_ID'],
                             orElse: () => {'Cg_Name': 'N/A'},
@@ -533,8 +535,8 @@ class _ProductPageState extends State<ProductPage1> {
         TextEditingController(text: product['Pro_Price'].toString());
     TextEditingController qtyController =
         TextEditingController(text: product['Pro_Qty'].toString());
-    TextEditingController descriptionController = TextEditingController(
-        text: product['Pro_Descrip']?.toString() ?? '');
+    TextEditingController descriptionController =
+        TextEditingController(text: product['Pro_Descrip']?.toString() ?? '');
 
     // Current selected size and category
     String? selectedSizeId = product['Size_ID']?.toString();
@@ -646,11 +648,13 @@ class _ProductPageState extends State<ProductPage1> {
                 final updatedQty = int.tryParse(qtyController.text) ?? 0;
                 final updatedDescription = descriptionController.text;
                 final updatedSizeId = int.tryParse(selectedSizeId ?? '0') ?? 0;
-                final updatedCgId = int.tryParse(selectedCategoryId ?? '0') ?? 0;
+                final updatedCgId =
+                    int.tryParse(selectedCategoryId ?? '0') ?? 0;
 
                 if (updatedName.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('ຊື່ສິນຄ້າບໍ່ສາມາດວ່າງເປົ່າໄດ້')),
+                    const SnackBar(
+                        content: Text('ຊື່ສິນຄ້າບໍ່ສາມາດວ່າງເປົ່າໄດ້')),
                   );
                   return;
                 }
@@ -808,7 +812,8 @@ class _ProductPageState extends State<ProductPage1> {
                 if (proId.isEmpty || proName.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
-                        content:Text('ລະຫັດສິນຄ້າ ແລະ ຊື່ສິນຄ້າບໍ່ສາມາດວ່າງເປົ່າໄດ້')),
+                        content: Text(
+                            'ລະຫັດສິນຄ້າ ແລະ ຊື່ສິນຄ້າບໍ່ສາມາດວ່າງເປົ່າໄດ້')),
                   );
                   return;
                 }
@@ -816,7 +821,8 @@ class _ProductPageState extends State<ProductPage1> {
                 // Check if product ID already exists
                 if (data.any((item) => item['Pro_ID'] == proId)) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('ລະຫັດສິນຄ້ານີ້ມີໃນລະບົບແລ້ວ')),
+                    const SnackBar(
+                        content: Text('ລະຫັດສິນຄ້ານີ້ມີໃນລະບົບແລ້ວ')),
                   );
                   return;
                 }

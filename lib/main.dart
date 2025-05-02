@@ -6,10 +6,6 @@ import 'package:coffee/screens/show.dart';
 import 'package:coffee/screens/test.dart';
 import 'package:coffee/screens/Create.dart';
 
-// class IntroPage extends StatelessWidget { const IntroPage({Key? key}) : super(key: key); @override Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Intro'))); }
-// class ShopPage extends StatelessWidget { const ShopPage({Key? key}) : super(key: key); @override Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Shop'))); }
-// class CartPage extends StatelessWidget { const CartPage({Key? key}) : super(key: key); @override Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Cart'))); }
-
 void main() {
   runApp(const MyApp());
 }
@@ -28,8 +24,7 @@ class MyApp extends StatelessWidget {
         '/intro_page': (context) => const LoginScreen(),
         '/shop_page': (context) => const ProductPage1(),
         '/set_product_page': (context) => const ProductPage(), // Assuming ProductPage is ShowProduct
-        '/register_page': (context) => const SignUpScreen(),
+        '/register_page': (context) => const RegisterPage1(),
         });
   }
 }
-//sada

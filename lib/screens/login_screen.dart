@@ -1,5 +1,7 @@
 // lib/screens/login_screen.dart
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import '../themes/apptheme.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -15,21 +17,66 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
 
-  void _login() {
+  void _login() async { // Make the function async
     if (_formKey.currentState!.validate()) {
       setState(() {
         _isLoading = true;
       });
 
-      // Simulate network delay
-      Future.delayed(const Duration(seconds: 1), () {
+      try {
+        print('Username to send: ${_usernameController.text}');
+        print('Password to send: ${_passwordController.text}');
+
+final response = await http.post(
+  Uri.parse('http://192.168.114.192:3000/login'),
+  headers: <String, String>{
+    'Content-Type': 'application/json; charset=UTF-8',
+  },
+  body: jsonEncode(<String, String>{
+    'username': _usernameController.text,
+    'password': _passwordController.text,
+  }),
+);
+
+        if (response.statusCode == 200) {
+          final responseData = jsonDecode(response.body);
+          // Assuming your backend returns a 'success' boolean and a 'message'
+          if (responseData['success'] == true) {
+            // Login successful, navigate to shop page
+            setState(() {
+              _isLoading = false;
+            });
+            Navigator.pushReplacementNamed(context, '/shop_page');
+            // Optionally store user ID or token if needed
+            print('Login successful: ${responseData['message']}');
+          } else {
+            // Login failed (e.g., wrong credentials), show error message from backend
+            setState(() {
+              _isLoading = false;
+            });
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(responseData['message'] ?? 'Login failed: Invalid credentials')),
+            );
+          }
+        } else {
+          // Handle server errors (e.g., 404, 500)
+          setState(() {
+            _isLoading = false;
+          });
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Server error: ${response.statusCode}. Please try again later.')),
+          );
+        }
+      } catch (error) {
+        // Handle network errors (e.g., no connection)
         setState(() {
           _isLoading = false;
         });
-
-        // Navigate to shop screen
-        Navigator.pushReplacementNamed(context, '/shop_page');
-      });
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Network error. Please check your connection and try again.')),
+        );
+        print('Error during login: $error');
+      }
     }
   }
 
