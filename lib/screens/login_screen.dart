@@ -46,7 +46,7 @@ final response = await http.post(
             setState(() {
               _isLoading = false;
             });
-            Navigator.pushReplacementNamed(context, '/shop_page');
+            Navigator.pushReplacementNamed(context, '/set_product_page');
             // Optionally store user ID or token if needed
             print('Login successful: ${responseData['message']}');
           } else {
