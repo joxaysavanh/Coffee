@@ -11,6 +11,7 @@ class RegisterPage1 extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage1> {
   final _formKey = GlobalKey<FormState>();
+  final int autoIncrementId = 1; // Replace with your auto-increment logic
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _villageController = TextEditingController();
@@ -111,7 +112,7 @@ class _RegisterPageState extends State<RegisterPage1> {
                       color: Colors.white,
                       shape: BoxShape.circle,
                     ),
-                    child: Image.asset('assets/logo.png'),
+                    child: Image.asset('assets/bg.png'),
                   ),
                 ),
                 const SizedBox(height: 30),
@@ -124,7 +125,7 @@ class _RegisterPageState extends State<RegisterPage1> {
                     fillColor: Colors.white,
                     hintText: 'Username',
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(100),
                       borderSide: BorderSide.none,
                     ),
                   ),
@@ -145,7 +146,7 @@ class _RegisterPageState extends State<RegisterPage1> {
                     fillColor: Colors.white,
                     hintText: 'Phone number',
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(20),
                       borderSide: BorderSide.none,
                     ),
                   ),
@@ -167,7 +168,7 @@ class _RegisterPageState extends State<RegisterPage1> {
                     fillColor: Colors.white,
                     hintText: 'Village',
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(100),
                       borderSide: BorderSide.none,
                     ),
                   ),
@@ -188,7 +189,7 @@ class _RegisterPageState extends State<RegisterPage1> {
                     fillColor: Colors.white,
                     hintText: 'District',
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(100),
                       borderSide: BorderSide.none,
                     ),
                   ),
@@ -209,7 +210,7 @@ class _RegisterPageState extends State<RegisterPage1> {
                     fillColor: Colors.white,
                     hintText: 'Province',
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(100),
                       borderSide: BorderSide.none,
                     ),
                   ),
@@ -230,7 +231,7 @@ class _RegisterPageState extends State<RegisterPage1> {
                     fillColor: Colors.white,
                     hintText: 'Password',
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(100),
                       borderSide: BorderSide.none,
                     ),
                   ),
