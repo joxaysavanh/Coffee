@@ -101,6 +101,7 @@ class _RegisterPageState extends State<RegisterPage1> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+<<<<<<< Updated upstream
         color: const Color(0xFFE67E22), // Orange background color
         child: SafeArea(
           child: Padding(
@@ -109,6 +110,56 @@ class _RegisterPageState extends State<RegisterPage1> {
               child: SingleChildScrollView(
                 child: Form(
                   key: _formKey,
+=======
+        decoration: BoxDecoration(
+          color: Colors.white,
+        ),
+        child: Column(
+          children: [
+            // Logo Area
+            Container(
+              padding: EdgeInsets.only(
+                top: 60,
+                bottom: 40,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.white,
+              ),
+              child: Center(
+                child: Column(
+                  children: [
+                    // JKT Chanom Logo
+                    Image.asset(
+                      'assets/logo.png',
+                      height: 120,
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      'JKT Chanom since 2025',
+                      style: TextStyle(
+                        color: Color(0xFFE67E22),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            // Form Area
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 24),
+                decoration: BoxDecoration(
+                  color: Color(0xFFE67E22),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
+                  ),
+                ),
+                child: SingleChildScrollView(
+>>>>>>> Stashed changes
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

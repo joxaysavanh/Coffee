@@ -1,4 +1,5 @@
 // lib/screens/login_screen.dart
+import 'package:coffee/screens/forget_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -17,13 +18,18 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
 
+<<<<<<< Updated upstream
   void _login() async { // Make the function async
+=======
+  Future<void> _login() async {
+>>>>>>> Stashed changes
     if (_formKey.currentState!.validate()) {
       setState(() {
         _isLoading = true;
       });
 
       try {
+<<<<<<< Updated upstream
         print('Username to send: ${_usernameController.text}');
         print('Password to send: ${_passwordController.text}');
 
@@ -76,6 +82,44 @@ final response = await http.post(
           const SnackBar(content: Text('Network error. Please check your connection and try again.')),
         );
         print('Error during login: $error');
+=======
+        // Call to your backend API
+        final response = await http.post(
+          Uri.parse('http://192.168.100.152:3000/api/login'),
+          headers: {'Content-Type': 'application/json'},
+          body: json.encode({
+            'userName': _usernameController.text,
+            'password': _passwordController.text,
+          }),
+        );
+
+        setState(() {
+          _isLoading = false;
+        });
+
+        if (response.statusCode == 200) {
+          // Login successful
+          final responseData = json.decode(response.body);
+
+          // You might want to save user data or token in shared preferences here
+
+          // Navigate to shop screen
+          Navigator.pushReplacementNamed(context, '/shop_page');
+        } else {
+          // Login failed
+          final responseData = json.decode(response.body);
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(responseData['message'] ?? 'Login failed')),
+          );
+        }
+      } catch (e) {
+        setState(() {
+          _isLoading = false;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: ${e.toString()}')),
+        );
+>>>>>>> Stashed changes
       }
     }
   }
@@ -104,7 +148,7 @@ final response = await http.post(
                 children: [
                   // JKT Logo
                   Image.asset(
-                    'assets/bg.png',
+                    'assets/logo.png',
                     height: 200,
                     width: 200,
                     // If asset is not available, use a placeholder
@@ -170,7 +214,10 @@ final response = await http.post(
                         controller: _usernameController,
                         decoration: InputDecoration(
                           hintText: 'Username',
-                          hintStyle: TextStyle(color: const Color.fromRGBO(0, 0, 0, 0.702)),
+                          prefixIcon:
+                              Icon(Icons.person, color: AppTheme.primaryColor),
+                          hintStyle: const TextStyle(
+                              color: Color.fromRGBO(0, 0, 0, 0.702)),
                           filled: true,
                           fillColor: const Color.fromARGB(255, 255, 255, 255),
                           border: OutlineInputBorder(
@@ -182,7 +229,7 @@ final response = await http.post(
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'ກະລຸນາໃສ່ຊື່ຜູ້ໃຊ້';
+                            return 'ກາລຸນາປ້ອນຊື່ຜູ້ໃຊ້';
                           }
                           return null;
                         },
@@ -195,7 +242,10 @@ final response = await http.post(
                         obscureText: true,
                         decoration: InputDecoration(
                           hintText: 'Password',
-                          hintStyle: TextStyle(color: const Color.fromARGB(179, 0, 0, 0)),
+                          prefixIcon:
+                              Icon(Icons.lock, color: AppTheme.primaryColor),
+                          hintStyle: const TextStyle(
+                              color: Color.fromARGB(179, 0, 0, 0)),
                           filled: true,
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
@@ -207,7 +257,7 @@ final response = await http.post(
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'ກະລຸນາໃສ່ລະຫັດຜ່ານ';
+                            return 'ກາລຸນາປ້ອນລະຫັດຜ່ານ';
                           }
                           return null;
                         },
@@ -244,15 +294,14 @@ final response = await http.post(
                         padding: const EdgeInsets.symmetric(vertical: 15),
                         child: TextButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, '/forgot_password_page'); // Navigate to forgot password page
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ForgotPasswordScreen()),
+                            );
                           },
-                          child: const Text(
-                            'Forget Password',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                            ),
-                          ),
+                          child: const Text('Forget Password'),
                         ),
                       ),
 
@@ -263,11 +312,13 @@ final response = await http.post(
                         children: [
                           const Text(
                             'Don\'t have an account?',
-                            style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 255, 255, 255)),
                           ),
                           TextButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, '/register_page'); // Navigate to registration page
+                              Navigator.pushNamed(context,
+                                  '/register_page'); // Navigate to registration page
                             },
                             child: const Text(
                               'Create an account',
