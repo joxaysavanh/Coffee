@@ -71,8 +71,12 @@ class BobaSplashScreen extends StatelessWidget {
                 onPressed: () {
                   // Navigation logic
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                   Navigator.pushReplacementNamed(context, '/intro_page');
 
+=======
+                  Navigator.pushNamed(context, '/login_page');
+>>>>>>> Stashed changes
 =======
                   Navigator.pushNamed(context, '/login_page');
 >>>>>>> Stashed changes
