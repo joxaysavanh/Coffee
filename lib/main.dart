@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var routes = {
-        '/intro_page': (context) => const LoginScreen(),
+        '/login_page': (context) => const LoginScreen(),
         '/shop_page': (context) => const ProductPage1(),
         '/set_product_page': (context) => const ShowProductsPage(), // Assuming ProductPage is ShowProduct
         '/register_page': (context) => const RegisterPage1(),

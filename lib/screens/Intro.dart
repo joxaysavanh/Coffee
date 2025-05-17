@@ -70,8 +70,12 @@ class BobaSplashScreen extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   // Navigation logic
+<<<<<<< Updated upstream
                   Navigator.pushReplacementNamed(context, '/intro_page');
 
+=======
+                  Navigator.pushNamed(context, '/login_page');
+>>>>>>> Stashed changes
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
